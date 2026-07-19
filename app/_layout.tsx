@@ -14,6 +14,7 @@ import { useSavedMealsStore } from "@/stores/savedMealsStore";
 import { useNutritionStore } from "@/stores/nutritionStore";
 import { SplashOverlay } from "@/components/SplashOverlay";
 import { configureRevenueCat } from "@/services/revenueCatService";
+import { useInviteDeepLink } from "@/hooks/useInviteDeepLink";
 import { isAtTarget, isPreAppRoute, resolveGate } from "@/utils/authGate";
 
 // The launch flow gate. Reads live store state, asks the pure resolver where the user belongs, and
@@ -80,6 +81,9 @@ export default function RootLayout() {
   }, []);
 
   useRouteGate();
+  // Capture any family-invite deep link and resume onto the Accept screen once the user is past
+  // the launch-flow gate (signed in, verified, profile complete).
+  useInviteDeepLink();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -96,6 +100,8 @@ export default function RootLayout() {
           <Stack.Screen name="recipe/[id]" />
           <Stack.Screen name="cook/[id]" options={{ presentation: "fullScreenModal", animation: "fade" }} />
           <Stack.Screen name="subscription" options={{ presentation: "modal" }} />
+          <Stack.Screen name="family/invite" />
+          <Stack.Screen name="invite/[token]" />
           <Stack.Screen name="pantry-scan" />
           <Stack.Screen name="pantry-review" />
         </Stack>

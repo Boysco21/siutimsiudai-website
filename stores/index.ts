@@ -10,3 +10,4 @@ export {
   MAX_WEEKLY_FREE_AI_LOGS,
   type SubscriptionTier,
 } from "./useSubscriptionStore";
+export { useFamilyStore } from "./familyStore";

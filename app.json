@@ -15,6 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.siutimsiudai.app",
+      "associatedDomains": ["applinks:siutimsiudai.app"],
       "infoPlist": {
         "NSCameraUsageDescription": "Siu Tim Siu Dai uses the camera to snap meals, scan barcodes, and read recipe cards.",
         "NSPhotoLibraryUsageDescription": "Siu Tim Siu Dai accesses your photos to log meals and import recipe images.",
@@ -26,6 +27,20 @@
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "siutimsiudai.app",
+              "pathPrefix": "/invite"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
       ]
     },
     "web": {

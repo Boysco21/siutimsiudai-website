@@ -7,6 +7,7 @@ import type { AuthOutcome } from "@/services/authService";
 import { forgetUser, identifyUser } from "@/services/revenueCatService";
 import { useAppStore } from "./appStore";
 import { useSubscriptionStore } from "./useSubscriptionStore";
+import { useFamilyStore } from "./familyStore";
 
 // The persisted stores that hold the user's own content. Cleared from the device on account
 // deletion so nothing personal is left at rest. Device preferences that are not personal data
@@ -19,6 +20,7 @@ const PERSONAL_DATA_KEYS = [
   "siutimsiudai-meal-plan",
   "siutimsiudai-grocery",
   "siutimsiudai-saved-meals",
+  "siutimsiudai-family",
 ];
 
 // Best-effort wipe of the on-device copy of the user's data. Runs only after the account is already
@@ -98,6 +100,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       // a fresh sign-up) starts on free instead of inheriting the previous user's tier. A live
       // RevenueCat build repopulates the real entitlement once the next user signs in.
       useSubscriptionStore.getState().resetTierForNewAccount();
+      // Clear any cached family roster and pending invite so the next account starts clean and a
+      // previous user's household never leaks onto a shared device.
+      useFamilyStore.getState().reset();
       // Detach from RevenueCat so the next account starts from its own anonymous receipt.
       forgetUser().catch(() => {});
     }

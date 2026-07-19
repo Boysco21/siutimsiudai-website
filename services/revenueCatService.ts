@@ -152,6 +152,31 @@ export async function forgetUser(): Promise<void> {
   }
 }
 
+// --- Entitlement checks ---------------------------------------------------------------------
+// The RevenueCat entitlement id that unlocks the Max tier. Mirrors ENTITLEMENT_TIER_MAP in
+// stores/useSubscriptionStore and the dashboard's Entitlements setup.
+export const MAX_ENTITLEMENT_ID = "max_tier";
+
+/**
+ * Client-side convenience check: does this device's server-validated receipt currently carry the
+ * Max entitlement? Reads RevenueCat's CustomerInfo when a live SDK is present.
+ *
+ * This is a UX pre-check ONLY — it decides how fast the invite affordance appears, nothing more.
+ * The real, unspoofable Max gate lives in the create-family-invite Edge Function, which re-verifies
+ * the entitlement with the RevenueCat SECRET key server-side before it will mint an invite. Returns
+ * false in mock mode (web / Expo Go), where the family screen falls back to the local activeTier
+ * mirror instead. Never throws.
+ */
+export async function hasActiveMaxEntitlement(): Promise<boolean> {
+  if (!isRevenueCatAvailable() || !PurchasesSDK) return false;
+  try {
+    const info = await PurchasesSDK.getCustomerInfo();
+    return Boolean(info.entitlements.active[MAX_ENTITLEMENT_ID]);
+  } catch {
+    return false;
+  }
+}
+
 // --- Offerings ------------------------------------------------------------------------------
 // Normalized shape the paywall renders. Each tier may expose a monthly and/or annual package
 // with a store-localized price string (e.g. "HK$48", "US$5.99") straight from StoreKit.

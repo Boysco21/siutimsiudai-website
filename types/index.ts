@@ -347,3 +347,19 @@ export interface IngredientDictionaryEntry {
   zh: string;
   aliases: string[]; // alternative spellings / synonyms, English and Chinese
 }
+
+// --- Family linking (Max plan) ---
+// Full definitions live in ./family; re-exported here so consumers can import from "@/types".
+export type {
+  FamilyRole,
+  FamilyInviteStatus,
+  FamilyGroup,
+  FamilyMember,
+  FamilyInvitation,
+  FamilySnapshot,
+  FamilyInvite,
+  CreateInviteReason,
+  CreateInviteResult,
+  PreviewResult,
+  AcceptResult,
+} from "./family";

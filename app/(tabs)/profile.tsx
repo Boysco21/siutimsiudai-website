@@ -166,6 +166,26 @@ export default function ProfileScreen() {
           />
         </View>
 
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t("family.title")}
+          onPress={() => router.push("/family/invite")}
+          className="flex-row items-center gap-3 rounded-2xl border border-[#E4DCCB] bg-surface p-4 active:opacity-70"
+        >
+          <View className="h-12 w-12 items-center justify-center rounded-full" style={{ backgroundColor: "#F5EBE0" }}>
+            <Ionicons name="people" size={22} color={colors.brand} />
+          </View>
+          <View className="flex-1">
+            <ScalableText className="text-base font-bold text-ink">{t("family.title")}</ScalableText>
+            <ScalableText className="text-xs text-ink-muted" numberOfLines={2}>
+              {tier === "max"
+                ? tl("Invite and manage family members.", "邀請及管理家庭成員。")
+                : t("family.maxOnly")}
+            </ScalableText>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color={colors.inkFaint} />
+        </Pressable>
+
         <View className="gap-2">
           <ScalableText className="px-1 text-sm font-semibold text-ink-muted">
             {t("profile.language")}
