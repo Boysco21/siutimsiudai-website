@@ -161,7 +161,19 @@
       "Bash(grep -vE '^\\\\s*#|^\\\\s*$')",
       "Bash(grep -rn \"EXPO_PUBLIC_\" --include=\"*.ts\" --include=\"*.tsx\" services/ stores/ constants/ app/ components/)",
       "Bash(grep -rniE \"ANTHROPIC|service_role|GCP_SERVICE_ACCOUNT|sk_[a-z]|private_key\" --include=\"*.ts\" --include=\"*.tsx\" services/ stores/ constants/ app/ components/ utils/ screens/)",
-      "Bash(open -R \".env\")"
+      "Bash(open -R \".env\")",
+      "mcp__1dfc969d-5a34-44ad-b508-ef981474d89a__execute_sql",
+      "mcp__1dfc969d-5a34-44ad-b508-ef981474d89a__apply_migration",
+      "mcp__1dfc969d-5a34-44ad-b508-ef981474d89a__get_advisors",
+      "Bash(git -C \"/Users/boyscoho/Downloads/Claude/Claude code/Meal-tracker and recipe\" status)",
+      "Bash(git -C \"/Users/boyscoho/Downloads/Claude/Claude code/Meal-tracker and recipe\" remote -v)",
+      "Bash(git -C \"/Users/boyscoho/Downloads/Claude/Claude code/Meal-tracker and recipe\" branch -vv)",
+      "Bash(git -C \"/Users/boyscoho/Downloads/Claude/Claude code/Meal-tracker and recipe\" show --stat --oneline 5807e9f)",
+      "Bash(ls -la .well-known/)",
+      "Bash(ls -la .nojekyll)",
+      "Bash(ls -la siutimsiudai-website/.well-known/)",
+      "Bash(git checkout *)",
+      "Bash(git add *)"
     ]
   }
 }
