@@ -1,0 +1,41 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Expo Web",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=/Users/boyscoho/.local/node/bin:$PATH && exec npm run web"
+      ],
+      "port": 8081
+    },
+    {
+      "name": "Expo (Metro / Expo Go)",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=/Users/boyscoho/.local/node/bin:$PATH && exec npm run start"
+      ],
+      "port": 8081
+    },
+    {
+      "name": "Expo iOS Simulator",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=/Users/boyscoho/.local/node/bin:$PATH && exec npm run ios"
+      ],
+      "port": 8081
+    },
+    {
+      "name": "Expo Android Emulator",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=/Users/boyscoho/.local/node/bin:$PATH && exec npm run android"
+      ],
+      "port": 8081
+    }
+  ]
+}

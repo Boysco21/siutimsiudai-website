@@ -1,0 +1,65 @@
+{
+  "expo": {
+    "name": "少甜少底",
+    "slug": "siutimsiudai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "siutimsiudai",
+    "userInterfaceStyle": "automatic",
+    "icon": "./assets/logo.png",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#151515"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.siutimsiudai.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Siu Tim Siu Dai uses the camera to snap meals, scan barcodes, and read recipe cards.",
+        "NSPhotoLibraryUsageDescription": "Siu Tim Siu Dai accesses your photos to log meals and import recipe images."
+      }
+    },
+    "android": {
+      "package": "com.siutimsiudai.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/logo.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-localization",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Siu Tim Siu Dai uses the camera to snap meals, scan barcodes, and read recipe cards."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Siu Tim Siu Dai accesses your photos to log meals and import recipe images."
+        }
+      ],
+      "expo-secure-store",
+      "expo-asset",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a2b7d1fb-013b-4055-a1e9-256c0c33571c"
+      }
+    }
+  }
+}

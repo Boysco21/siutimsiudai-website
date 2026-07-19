@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# secrets
+.env
+.env*.local
+env.local.txt
+*.local.txt
+
+# GCP / service-account keys (server-side only, never commit or bundle)
+siutimsiutai-camera-ai-*.json
+*service-account*.json
+*-serviceaccount.json
+gcp-*.json
+
+# misc
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.DS_Store
