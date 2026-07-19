@@ -17,13 +17,13 @@
       "bundleIdentifier": "com.siutimsiudai.app",
       "infoPlist": {
         "NSCameraUsageDescription": "Siu Tim Siu Dai uses the camera to snap meals, scan barcodes, and read recipe cards.",
-        "NSPhotoLibraryUsageDescription": "Siu Tim Siu Dai accesses your photos to log meals and import recipe images."
+        "NSPhotoLibraryUsageDescription": "Siu Tim Siu Dai accesses your photos to log meals and import recipe images.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "package": "com.siutimsiudai.app",
       "permissions": [
-        "android.permission.CAMERA",
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ]
