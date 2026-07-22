@@ -7,13 +7,23 @@ dist/
 web-build/
 expo-env.d.ts
 
-# native
+# native / code-signing keys (SECRET private keys — never commit)
+# Broadened globs (*.p8*, not just *.p8) so macOS duplicate suffixes like ".p8 copy" / ".p8 2"
+# cannot slip past the ignore, plus Apple key filenames by prefix regardless of extension.
 *.orig.*
 *.jks
-*.p8
-*.p12
+*.p8*
+*.p12*
 *.key
-*.mobileprovision
+*.mobileprovision*
+AuthKey_*
+SubscriptionKey_*
+
+# build artifacts (compiled app archives should never live in the repo)
+*.tar.gz
+*.ipa
+*.aab
+*.apk
 
 # secrets
 .env
