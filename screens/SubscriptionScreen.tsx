@@ -198,11 +198,15 @@ export function SubscriptionScreen() {
         ),
       );
     } else if (reason === "network") {
+      // A network error here is NOT authoritative. RevenueCat's offline queue retries the receipt and
+      // the CustomerInfo listener unlocks the tier on its own once the connection recovers (Apple
+      // dedupes the transaction, so there is never a double charge). So this copy stays reassuring and
+      // covers both outcomes (still-completing vs. genuinely failed), never a hard "entry failed".
       Alert.alert(
-        tl("Network traffic jam", "網絡塞車"),
+        tl("Network's a bit jammed", "網絡有啲塞"),
         tl(
-          "Network traffic jam... The ledger entry failed. Your data is safe, please try again later!",
-          "網絡塞車，個記帳簿一時入唔到數。你嘅記錄安全無失，遲啲再試！",
+          "The connection stalled while we confirmed your purchase. If it went through, your plan unlocks automatically once you're back online, with no double charge. If nothing shows up in a minute, tap Restore or try again.",
+          "頭先網絡塞咗，未即刻確認到你單購買。如果過咗數，一返到網就會自動幫你解鎖，唔會多收你錢。過一分鐘都仲未見到，就撳「還原購買」或者再試多次。",
         ),
       );
     } else {
