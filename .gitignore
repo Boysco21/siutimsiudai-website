@@ -42,3 +42,6 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 .DS_Store
+
+# Claude Code local tool-permission grants (per-machine, keep local, not shared)
+.claude/settings.local.json
