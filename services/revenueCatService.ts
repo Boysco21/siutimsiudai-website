@@ -37,9 +37,14 @@ import { PurchasesSDK } from "./purchasesModule";
 const APPLE_API_KEY =
   process.env.EXPO_PUBLIC_REVENUECAT_APPLE_API_KEY ?? "appl_PLACEHOLDER_NOT_CONFIGURED";
 
-// A real Apple public key starts with "appl_" and isn't our placeholder. Anything else means the
-// build wasn't configured for live purchases, so we deliberately stay in mock mode.
-const KEY_LOOKS_REAL = APPLE_API_KEY.startsWith("appl_") && !APPLE_API_KEY.includes("PLACEHOLDER");
+// A real Apple public key starts with "appl_" and isn't one of our stand-ins. Two placeholders
+// must fail this check: the code default above (appl_PLACEHOLDER_NOT_CONFIGURED) and the
+// .env.example stub (appl_xxxx...x). Either one means the build wasn't configured for live
+// purchases, so we stay in mock mode instead of handing RevenueCat a bogus key, which the native
+// SDK rejects at boot with a noisy "Invalid API key" error. A genuine key is random base62 and
+// never contains "PLACEHOLDER" or a long run of x's, so this only ever screens out the stubs.
+const KEY_LOOKS_REAL =
+  APPLE_API_KEY.startsWith("appl_") && !/placeholder|x{8,}/i.test(APPLE_API_KEY);
 
 type Availability = "unknown" | "ready" | "unavailable";
 let availability: Availability = "unknown";
@@ -145,10 +150,17 @@ export async function identifyUser(appUserId: string): Promise<void> {
 export async function forgetUser(): Promise<void> {
   if (!isRevenueCatAvailable() || !PurchasesSDK) return;
   try {
+    // RevenueCat's logOut throws (and logs a noisy "current user is anonymous" console.error, which
+    // surfaces as a red LogBox in dev) when there is no identified user to detach — the normal state
+    // on a cold boot with no session, or right after a prior sign-out. Guard on isAnonymous() so we
+    // only call logOut when a real account is actually attached. authStore already reset the local
+    // tier, so the anonymous case needs nothing more from us here.
+    if (await PurchasesSDK.isAnonymous()) return;
     const info = await PurchasesSDK.logOut();
     syncTierFromCustomerInfo(info);
   } catch {
-    // logOut throws when already anonymous; the local tier reset in authStore covers that case.
+    // Defensive only: the guard above prevents the common already-anonymous throw; any other transient
+    // native error leaves the tier as-is, and the local reset in authStore covers that case.
   }
 }
 
