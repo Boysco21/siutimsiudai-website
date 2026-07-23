@@ -31,6 +31,13 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "ascAppId": "6792303078",
+        "ascApiKeyPath": "/Users/boyscoho/AppStoreKeys/AuthKey_A978GL7CVQ.p8",
+        "ascApiKeyId": "A978GL7CVQ",
+        "ascApiKeyIssuerId": "10c1ceda-7022-4b2c-82d9-616e0d6c891a"
+      }
+    }
   }
 }
