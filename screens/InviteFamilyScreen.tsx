@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, ScrollView, Share, View } from "react-nat
 import { router } from "expo-router";
 import * as Clipboard from "expo-clipboard";
 import { Ionicons } from "@expo/vector-icons";
+import QRCode from "react-native-qrcode-svg";
 import { Screen } from "@/components/Screen";
 import { ScalableText } from "@/components/ScalableText";
 import { Button } from "@/components/Button";
@@ -217,6 +218,22 @@ export function InviteFamilyScreen() {
                     <Ionicons name="checkmark-circle" size={20} color={colors.brand} />
                     <ScalableText className="text-base font-bold text-ink">
                       {t("family.linkReady")}
+                    </ScalableText>
+                  </View>
+                  <View className="items-center gap-2 py-1">
+                    <View
+                      className="rounded-2xl border border-[#E4DCCB] p-3"
+                      style={{ backgroundColor: "#FFFFFF" }}
+                    >
+                      <QRCode
+                        value={invite.url}
+                        size={180}
+                        color={colors.ink}
+                        backgroundColor="#FFFFFF"
+                      />
+                    </View>
+                    <ScalableText className="text-xs text-ink-muted">
+                      {tl("Scan to accept the invitation", "掃描即可接受邀請")}
                     </ScalableText>
                   </View>
                   <View className="rounded-xl bg-surface-sunken px-3 py-2">
